@@ -1,10 +1,21 @@
+require("dotenv").config();
 const express = require('express');
+
+const mongoose = require('mongoose');
+
+console.log(process.env.DATABASE);
+mongoose.connect(process.env.DATABASE,{
+    useNewUrlParser : true,
+    useUnifiedTopology : true
+})
+.then(() => {
+    console.log("db is connected");
+});
 
 const port = process.env.PORT || 8181;
 
 const app = express();
 const path = require('path');
-const db = require('./config/mongoose');
 app.set('view engine','ejs');
 app.set('views', path.join(__dirname,'views'));
 
